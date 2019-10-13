@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <router-view/>
-    <button v-if="$store.state.user.isLogin" @click="logout">注销</button>
-  
+    <!-- <button v-if="$store.state.user.isLogin" @click="logout">注销</button>
+   -->
     <cube-tab-bar v-model="selectLabel" :data="tabs" @change="onChangeTab">
       <cube-tab v-for="(item, index) in tabs" 
                 :icon="item.icon" :label="item.value" :key="index">

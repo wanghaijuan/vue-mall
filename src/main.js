@@ -5,7 +5,7 @@ import router from './router'
 import store from './store/index'
 import interceptor from './interceptor'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = true
 
 
 

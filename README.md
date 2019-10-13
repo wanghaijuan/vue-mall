@@ -1,4 +1,4 @@
-# vue-login
+# vue-mall
 
 ## des
 vue + cube-ui（感觉用它相对比较支持vue-cli3）+ router + vuex + aixos
