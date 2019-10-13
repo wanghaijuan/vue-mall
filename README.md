@@ -1,29 +1,21 @@
 # vue-login
 
-## Project setup
+## des
+vue + cube-ui（感觉用它相对比较支持vue-cli3）+ router + vuex + aixos
+```
+vue add cube-ui
+vue add route
+vue add vuex
+```
+
+
+## Project
 ```
 npm install
-```
-
-### Compiles and hot-reloads for development
-```
 npm run serve
-```
-
-### Compiles and minifies for production
-```
 npm run build
-```
-
-### Run your tests
-```
 npm run test
-```
-
-### Lints and fixes files
-```
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
