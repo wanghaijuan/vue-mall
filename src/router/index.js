@@ -1,11 +1,18 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home'
-import Login from '../views/Login'
-import Cart from '../views/Cart'
+import Home from '@/views/Home'
+import Login from '@/views/Login'
+import Cart from '@/views/Cart'
+import History from '@/utils/history'
 
-
+Vue.use(History)
 Vue.use(VueRouter)
+
+// 扩展Router，添加goBack方法
+VueRouter.prototype.goBack = function() {
+  this.isBack = true;
+  this.back();
+};
 
 const routes = [
   {
@@ -78,5 +85,17 @@ router.beforeEach((to, from, next) => {
     next();
   }
 })
+
+// 每次从路由出来以后
+router.afterEach((to, from) => {
+  if (router.isBack) {
+    History.pop();
+    router.isBack = false;
+    router.transitionName = "route-back";
+  } else {
+    History.push(to.path);
+    router.transitionName = "route-forward";
+  }
+});
 
 export default router

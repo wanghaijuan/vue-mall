@@ -1,5 +1,8 @@
 <template>
   <div class="home">
+    <m-header title="商城">
+      <i class="cubeic-tag"></i>
+    </m-header>
     <!-- <router-link to="/login">Login</router-link> |
     <router-link to="/about">About</router-link> |
     <router-link to="/cart">Cart</router-link> -->
@@ -14,26 +17,28 @@
       </cube-slide-item>
     </cube-slide>
     </div>
-    
 
-     <!-- 商品列表 -->
+    <!-- 商品列表 -->
     <good-list :data="goods" @cartanim="startCartAnim" ></good-list>
-    </div>
+
+  </div>
+  
   </div>
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters } from "vuex";
-import GoodList from "@/components/GoodList.vue";
+import { mapState, mapActions, mapGetters } from "vuex"
+import GoodList from "@/components/GoodList.vue"
+import CartAnim from '@/components/CartAnim.vue'
+import MHeader from '@/components/Header.vue'
 
 export default {
   name: 'home',
   components: {
-    GoodList
+    GoodList, CartAnim, MHeader
   },
   created() {
     this.fetchGoods();
-    console.log()
   },
   computed: {
     ...mapState({slider: state => state.goods.slider}),
@@ -42,7 +47,20 @@ export default {
   methods: {
     ...mapActions(['fetchGoods']),
     startCartAnim(el) {
+      console.log(el)
+      // 创建小球动画实例，开始动画
+      // 方法一
+      // const anim = this.$createCartAnim({
+      //   onTransitionend(){
+      //     anim.remove();
+      //   }
+      // });
+      // anim.start(el)
 
+      // 方法二 create
+      const anim = this.$create(CartAnim, {posi: {bottom: '40px'}});
+      anim.start(el)
+      anim.$on('transitionend',anim.remove);
     }
   }
 }

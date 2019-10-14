@@ -1,20 +1,23 @@
 <template>
   <div id="app">
+    <!-- <transition name="route-forward"> -->
+    <transition :name="transitionName">
+
     <router-view/>
-    <!-- <button v-if="$store.state.user.isLogin" @click="logout">注销</button>
-   -->
+    </transition>
+    <!-- <button v-if="$store.state.user.isLogin" @click="logout">注销</button>-->
     <cube-tab-bar v-model="selectLabel" :data="tabs" @change="onChangeTab">
       <cube-tab v-for="(item, index) in tabs" 
                 :icon="item.icon" :label="item.value" :key="index">
         <div>{{item.label}}</div>
-        <!-- <span class="badge" v-if="item.label === 'Cart'">{{cartTotal}}</span> -->
+        <span class="badge" v-if="item.label === 'Cart'">{{cartTotal}}</span>
       </cube-tab>
     </cube-tab-bar>
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue
 import { mapGetters } from 'vuex'
 
 export default {
@@ -43,7 +46,6 @@ export default {
     }
   },
   components: {
-    // HelloWorld
   },
   created() {
 
@@ -55,7 +57,7 @@ export default {
     }
   },
   computed: {
-    // ...mapGetters([cartTotal])
+    ...mapGetters(['cartTotal'])
   },
   methods: {
     logout() {
@@ -69,10 +71,11 @@ export default {
 }
 </script>
 
-<style lang='stylus' >
-html, body 
-  width 100%
-  height 100%
+<style lang='stylus'>
+html, body {
+  width: 100%;
+  height: 100%;
+}
 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -86,9 +89,49 @@ html, body
   overflow-x: hidden;
   overflow-y: scroll;
 }
-.cube-tab-bar 
-  position absolute;
-  width 100%
-  bottom 0px
+.cube-tab-bar {
+  position: absolute;
+  width: 100%
+  bottom: 0px
+}
+
+.cube-tab {
+  position: relative;
+}
+
+span.badge {
+  background: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px;
+  min-width: 16px;
+  min-height: 16px;
+  position: absolute;
+  margin-left: 6px;
+  top: 0;
+}
+
+// 动画
+/* 入场前 */
+.route-forward-enter {
+  transform: translate3d(-100%, 0, 0);
+}
+.route-back-enter {
+  transform: translate3d(100%, 0, 0);
+}
+/* 出场后 */
+.route-forward-leave-to {
+  transform: translate3d(100%, 0, 0);
+}
+.route-back-leave-to {
+  transform: translate3d(-100%, 0, 0);
+}
+/* 动画执行时间 */
+.route-forward-enter-active,
+.route-forward-leave-active,
+.route-back-enter-active,
+.route-back-leave-active {
+  transition: transform 0.3s;
+}
 
 </style>

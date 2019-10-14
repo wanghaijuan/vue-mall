@@ -34,7 +34,7 @@ export default {
 };
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
 .item {
   padding: 10px;
   overflow: hidden;
